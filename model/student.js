@@ -67,6 +67,16 @@ class Student {
     return {
       name: this.name,
       roll_no: this.roll_no,
+      marks: this.marks,
+      mentor: this.mentor,
+      stream:this.stream,
+    };
+  }
+
+  toDBJSON() {
+    return {
+      name: this.name,
+      roll_no: this.roll_no,
       marks: this.marks.map(x => x.value),
       mentor: this.mentor,
       stream:this.stream,

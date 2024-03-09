@@ -5,7 +5,7 @@ const { mentorHasStudent } = require("./mentors");
 const createStudent = async ({ name, rollno, marks, mentor,stream }) => {
   const student = new Student(name, rollno, marks, mentor, stream);
   await db.update({name: mentor}, { $push: { students: rollno } }, "mentors");
-  return db.create(student.toJSON(), "students");
+  return db.create(student.toDBJSON(), "students");
 };
 
 const updateStudent = async ({ name, rollno, marks, mentor,stream }) => {
@@ -17,7 +17,7 @@ const updateStudent = async ({ name, rollno, marks, mentor,stream }) => {
     {
       rollno,
     },
-    student.toJSON(),
+    student.toDBJSON(),
     "students"
   );
 };
