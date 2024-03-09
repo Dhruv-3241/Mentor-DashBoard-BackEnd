@@ -27,16 +27,16 @@ router
   })
   .get("/:roll_no", async (req, res) => {
     try {
-    const roll_no = req.params.roll_no;
-    const student = await StudentController.getStudent({ rollno: roll_no });
-    if (!student) {
-      res.status(404).json({ message: "Student not found" });
-      return;
-    }
+      const roll_no = req.params.roll_no;
+      const student = await StudentController.getStudent({ rollno: roll_no });
+      if (!student) {
+        res.status(404).json({ message: "Student not found" });
+        return;
+      }
 
-    res.json({
-      data: student.toJSON(),
-    });
+      res.json({
+        data: student.toJSON(),
+      });
     } catch (e) {
       res.status(500).json({ message: e.message });
     }

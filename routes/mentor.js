@@ -57,6 +57,24 @@ router
     } catch (e) {
       res.status(400).json({ message: e.message });
     }
+  }).get("/isLock", async (req, res) => {
+    const { mentor } = req.body;
+    try {
+      const data = await MentorController.getMentor(mentor);
+      res.json({ message: data.locked });
+    } catch (e) {
+      res.status(400).json({ message: e.message });
+    }
+  }).get("/students", async (req, res) => {
+    const { mentor } = req.body;
+    try {
+      const students = await MentorController.getMentorStudents(mentor);
+      res.json({
+        data: students.map((student) => student.toJSON()),
+      });
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
   });
 
 module.exports = router;
