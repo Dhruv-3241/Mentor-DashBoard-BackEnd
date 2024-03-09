@@ -56,8 +56,9 @@ router
       res.status(400).json({ message: e.message });
     }
   })
-  .patch("/:roll_no/marks", async (req, res) => {
+  .post("/:roll_no/marks", async (req, res) => {
     const { marks } = req.body;
+    console.log(req.body)
     const roll_no = req.params.roll_no;
     try {
       const student = await StudentController.getStudent({ rollno: roll_no });

@@ -10,7 +10,16 @@ This file/folder contains all the database related operations like connecting to
 
 ##### Functions
 
+`update(filter, data, collection)`: This function is used to update a document in a specific MongoDB collection. It takes three parameters:
 
+`filter`: This is an object that defines the conditions for the document that you want to update.
+`data`: This is an object that contains the new data that you want to set in the document.
+`collection`: This is the name of the collection where the document is located. The $set operator replaces the value of a field with the specified value.
+`updatePush(filter, data, collection`): This function is used to add an item to an array field in a document in a specific MongoDB collection. It takes the same parameters as the update function. The $push operator appends a specified value to an array.
+
+`updatePull(filter, data, collection)`: This function is used to remove an item from an array field in a document in a specific MongoDB collection. It takes the same parameters as the update function. The $pull operator removes all instances of a value from an existing array.
+
+All these functions return a Promise that resolves to an UpdateOneResult object. This object contains information about the result of the operation, such as the number of documents that were matched and modified.
 
 #### Student
 This file/folder is responsible for handling all the operations related to students. It may include functions for creating a new student, fetching student details, updating student information, and deleting a student.
