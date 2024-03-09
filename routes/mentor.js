@@ -128,7 +128,7 @@ router
       res.status(500).json({ message: e.message });
     }
   })
-  .post("/sendMail", async (req, res) => {
+  .post("/sendmail", async (req, res) => {
     const { mentor } = req.body;
     try {
       const students = await MentorController.getMentorStudents(mentor);
