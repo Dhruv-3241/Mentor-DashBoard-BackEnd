@@ -5,13 +5,13 @@ const getMentorStudents = async (mentor) => {
     const data = await db.get({ name: mentor }, "mentors");
     if (!data) return [];
     const students = [];
-    console.log(data)
+    //console.log(data)
     for (const st of data.students) {
-        console.log(st);
+        //console.log(st);
         let student = await db.get({ rollno: st }, "students");
-        // console.log(student)
+        // //console.log(student)
         student = new Student(student.name, student.rollno, student.marks, student.mentor, student.stream);
-        console.log(student)
+        //console.log(student)
         students.push(student);
     }
 
@@ -38,7 +38,7 @@ const removeStudent = async (mentor, rollno) => {
 }
 
 const addStudent = async (mentor, rollno) => {
-    return db.update({ name: mentor }, { $push: { students: rollno } }, "mentors");
+    return db.updatePush({ name: mentor },  { students: rollno } , "mentors");
 }
 
 const isLockMentor = async (mentor) => {

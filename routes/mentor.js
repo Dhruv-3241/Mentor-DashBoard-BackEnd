@@ -43,9 +43,13 @@ router
   .post("/bulkAdd", async (req, res) => {
     const { mentor, rollnos } = req.body;
     try {
-      for (const rollno of rollnos) {
+      //console.log(rollnos)
+      for (let i = 0; i < rollnos.length; i++) {
+        const rollno = rollnos[i];
         await MentorController.addStudent(mentor, rollno);
+        //console.log(rollno)
         const studentData = await StudentController.getStudent({ rollno });
+        //console.log(studentData);
         if (!studentData) {
           res.status(404).json({ message: "Student not found" });
           return;
@@ -53,8 +57,10 @@ router
         await StudentController.updateStudent({
           ...studentData.toJSON(),
           mentor,
+          rollno,
         });
       }
+
       res.json({ message: "Students added" });
     } catch (e) {
       res.status(400).json({ message: e.message });

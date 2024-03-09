@@ -17,7 +17,7 @@ router
     try {
       const mentor = req.params.mentor;
       const students = await StudentController.getAllStudents({ mentor });
-      // console.log(students);
+      // //console.log(students);
       res.json({
         data: students.map((student) => student.toJSON()),
       });

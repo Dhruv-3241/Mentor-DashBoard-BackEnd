@@ -48,6 +48,10 @@ class DB {
     return this.db.collection(collection).updateOne(filter, { $set: data });
   }
 
+  updatePush(filter, data, collection) {
+    return this.db.collection(collection).updateOne(filter, { $push: data });
+  }
+
   /**
    * Description
    * @param {{key:string}} data
@@ -107,10 +111,10 @@ module.exports = db;
 //     await client.connect();
 //     // Send a ping to confirm a successful connection
 //     await client.db("admin").command({ ping: 1 });
-//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//     //console.log("Pinged your deployment. You successfully connected to MongoDB!");
 //   } finally {
 //     // Ensures that the client will close when you finish/error
 //     await client.close();
 //   }
 // }
-// run().catch(console.dir);
+// run().catch(//console.dir);

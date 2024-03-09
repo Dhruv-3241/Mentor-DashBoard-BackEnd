@@ -15,6 +15,7 @@ class Student {
         value: Number(mark),
       };
     });
+    //console.log(roll_no)
     this.#validate(name, roll_no, marks, mentor, stream);
     this.name = name;
     this.roll_no = roll_no;
@@ -68,6 +69,7 @@ class Student {
       roll_no: this.roll_no,
       marks: this.marks,
       mentor: this.mentor,
+      stream:this.stream,
     };
   }
 }
