@@ -67,8 +67,8 @@ router
       res.status(400).json({ message: e.message });
     }
   })
-  .get("/students", async (req, res) => {
-    const { mentor } = req.body;
+  .get("/:mentor/students", async (req, res) => {
+    const { mentor } = req.params;
     try {
       const students = await MentorController.getMentorStudents(mentor);
       res.json({
