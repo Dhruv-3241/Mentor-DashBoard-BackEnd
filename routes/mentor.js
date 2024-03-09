@@ -43,7 +43,7 @@ router
   .post("/bulkAdd", async (req, res) => {
     const { mentor, rollnos } = req.body;
     try {
-      //console.log(rollnos)
+      console.log(rollnos)
       await MentorController.updateStudents(mentor, rollnos);
       for (let i = 0; i < rollnos.length; i++) {
         const rollno = rollnos[i];
