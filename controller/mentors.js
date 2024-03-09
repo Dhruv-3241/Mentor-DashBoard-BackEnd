@@ -1,5 +1,5 @@
 const db = require("./db");
-const { getStudent } = require("./students");
+const Student = require("../model/student");
 
 const getMentorStudents = async (mentor) => {
     const data = await db.get({ name: mentor }, "mentors");
@@ -8,7 +8,9 @@ const getMentorStudents = async (mentor) => {
     console.log(data)
     for (const st of data.students) {
         console.log(st);
-        const student = await getStudent({ rollno: st });
+        let student = await db.get({ rollno: st }, "students");
+        // console.log(student)
+        student = new Student(student.name, student.rollno, student.marks, student.mentor, student.stream);
         console.log(student)
         students.push(student);
     }
