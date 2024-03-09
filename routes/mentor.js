@@ -40,6 +40,26 @@ router
       res.status(400).json({ message: e.message });
     }
   })
+  .post("/bulkAdd", async (req, res) => {
+    const { mentor, rollnos } = req.body;
+    try {
+      for (const rollno of rollnos) {
+        await MentorController.addStudent(mentor, rollno);
+        const studentData = await StudentController.getStudent({ rollno });
+        if (!studentData) {
+          res.status(404).json({ message: "Student not found" });
+          return;
+        }
+        await StudentController.updateStudent({
+          ...studentData.toJSON(),
+          mentor,
+        });
+      }
+      res.json({ message: "Students added" });
+    } catch (e) {
+      res.status(400).json({ message: e.message });
+    }
+  })
   .post("/remove", async (req, res) => {
     const { mentor, rollno } = req.body;
     try {
@@ -54,6 +74,26 @@ router
       });
       await MentorController.removeStudent(mentor, rollno);
       res.json({ message: "Student removed" });
+    } catch (e) {
+      res.status(400).json({ message: e.message });
+    }
+  })
+  .post("/bulkRemove", async (req, res) => {
+    const { mentor, rollnos } = req.body;
+    try {
+      for (const rollno of rollnos) {
+        const studentData = await StudentController.getStudent({ rollno });
+        if (!studentData) {
+          res.status(404).json({ message: "Student not found" });
+          return;
+        }
+        await StudentController.updateStudent({
+          ...studentData.toJSON(),
+          mentor: "",
+        });
+        await MentorController.removeStudent(mentor, rollno);
+      }
+      res.json({ message: "Students removed" });
     } catch (e) {
       res.status(400).json({ message: e.message });
     }
