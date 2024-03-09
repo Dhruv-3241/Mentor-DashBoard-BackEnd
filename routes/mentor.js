@@ -57,15 +57,17 @@ router
     } catch (e) {
       res.status(400).json({ message: e.message });
     }
-  }).get("/isLock", async (req, res) => {
-    const { mentor } = req.body;
+  })
+  .get("/:mentor/isLock", async (req, res) => {
+    const { mentor } = req.params;
     try {
       const data = await MentorController.getMentor(mentor);
       res.json({ message: data.locked });
     } catch (e) {
       res.status(400).json({ message: e.message });
     }
-  }).get("/students", async (req, res) => {
+  })
+  .get("/students", async (req, res) => {
     const { mentor } = req.body;
     try {
       const students = await MentorController.getMentorStudents(mentor);
