@@ -52,6 +52,12 @@ class DB {
     return this.db.collection(collection).updateOne(filter, { $push: data });
   }
 
+  updatePull(filter, data, collection) {
+    return this.db.collection(collection).updateOne(filter, {
+      $pull: data,
+    });
+  }
+
   /**
    * Description
    * @param {{key:string}} data

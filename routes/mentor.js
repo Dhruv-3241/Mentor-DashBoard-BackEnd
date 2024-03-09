@@ -44,9 +44,10 @@ router
     const { mentor, rollnos } = req.body;
     try {
       //console.log(rollnos)
+      await MentorController.updateStudents(mentor, rollnos);
       for (let i = 0; i < rollnos.length; i++) {
         const rollno = rollnos[i];
-        await MentorController.addStudent(mentor, rollno);
+
         //console.log(rollno)
         const studentData = await StudentController.getStudent({ rollno });
         //console.log(studentData);
@@ -74,8 +75,10 @@ router
         res.status(404).json({ message: "Student not found" });
         return;
       }
+      console.log(studentData)
       await StudentController.updateStudent({
         ...studentData.toJSON(),
+        rollno,
         mentor: "",
       });
       await MentorController.removeStudent(mentor, rollno);

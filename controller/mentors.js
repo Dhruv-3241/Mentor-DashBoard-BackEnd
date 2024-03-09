@@ -34,11 +34,15 @@ const mentorHasStudent = async (mentor, rollno) => {
 }
 
 const removeStudent = async (mentor, rollno) => {
-    return db.update({ name: mentor }, { $pull: { students: rollno } }, "mentors");
+    return db.updatePull({ name: mentor },  { students: rollno } , "mentors");
 }
 
 const addStudent = async (mentor, rollno) => {
     return db.updatePush({ name: mentor },  { students: rollno } , "mentors");
+}
+
+const updateStudents = async (mentor, rollnos) => {
+    return db.update({ name: mentor },  { students: rollnos } , "mentors");
 }
 
 const isLockMentor = async (mentor) => {
@@ -52,6 +56,7 @@ module.exports = {
     lockMentor,
     mentorHasStudent,
     removeStudent,
+    updateStudents,
     addStudent,
     isLockMentor
 }
