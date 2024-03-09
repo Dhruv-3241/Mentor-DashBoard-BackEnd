@@ -4,8 +4,14 @@ const getMentorStudents = async (mentor) => {
     const data = await db.get({ name: mentor }, "mentors");
     if (!data) return [];
     const students = [];
+    console.log(data)
     for (const st of data.students) {
-        const student = await db.get({ rollno: st }, "students");
+        console.log(st);
+        const student = await db.get({ rollno: st }, "students").catch((err) => {
+            console.error(err);
+            return {};
+        })
+        console.log(student)
         students.push(student);
     }
 
@@ -34,11 +40,17 @@ const addStudent = async (mentor, rollno) => {
     return db.update({ name: mentor }, { $push: { students: rollno } }, "mentors");
 }
 
+const isLockMentor = async (mentor) => {
+    const data = await db.get({ name: mentor }, "mentors");
+    return data?.locked;
+}
+
 module.exports = {
     getMentorStudents,
     unlockMentor,
     lockMentor,
     mentorHasStudent,
     removeStudent,
-    addStudent
+    addStudent,
+    isLockMentor
 }

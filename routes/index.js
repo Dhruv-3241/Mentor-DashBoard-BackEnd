@@ -5,7 +5,7 @@ const MentorRoutes = require("./mentor");
 
 router
   .use("/students", StudentRoutes)
-  .use("/mentor", MentorRoutes)
+  .use("/mentors", MentorRoutes)
   .get("/", (req, res) => {
     res.json({
       message: "Welcome to the MentorDash API",

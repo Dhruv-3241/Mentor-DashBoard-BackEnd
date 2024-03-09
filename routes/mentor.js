@@ -98,11 +98,11 @@ router
       res.status(400).json({ message: e.message });
     }
   })
-  .get("/:mentor/isLock", async (req, res) => {
+  .get("/:mentor/islock", async (req, res) => {
     const { mentor } = req.params;
     try {
-      const data = await MentorController.getMentor(mentor);
-      res.json({ message: data.locked });
+      const data = await MentorController.isLockMentor(mentor);
+      res.json({ message: data });
     } catch (e) {
       res.status(400).json({ message: e.message });
     }
@@ -112,7 +112,7 @@ router
     try {
       const students = await MentorController.getMentorStudents(mentor);
       res.json({
-        data: students.map((student) => student.toJSON()),
+        data: students,
       });
     } catch (e) {
       res.status(500).json({ message: e.message });
