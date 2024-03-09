@@ -9,7 +9,7 @@ const topics = [
 
 class Student {
   constructor(name, roll_no, marks, mentor, stream) {
-    marks = marks.slice(0, 5).map((mark, index) => {
+    marks = marks.slice(0, 6).map((mark, index) => {
       return {
         name: topics[index],
         value: Number(mark),
