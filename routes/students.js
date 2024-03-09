@@ -61,10 +61,12 @@ router
     const roll_no = req.params.roll_no;
     try {
       const student = await StudentController.getStudent({ rollno: roll_no });
+      console.log(student)
       if (!student) {
         res.status(404).json({ message: "Student not found" });
         return;
       }
+      console.log(marks);
       await StudentController.updateStudent({
         rollno: roll_no,
         marks,

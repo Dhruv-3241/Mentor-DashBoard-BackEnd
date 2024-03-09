@@ -77,7 +77,7 @@ class Student {
     return {
       name: this.name,
       roll_no: this.roll_no,
-      marks: this.marks.map(x => x.value),
+      marks: this.marks.map(x => x.value.toString()),
       mentor: this.mentor,
       stream:this.stream,
     };
