@@ -132,7 +132,7 @@ router
     const { mentor } = req.body;
     try {
       const students = await MentorController.getMentorStudents(mentor);
-      const tos = students.map((student) => { name: student.name, email: student.email });
+      const tos = students.map((student) => ({ name: student.name, email: student.email }));
 
       // send mail
       await sendMail({
@@ -140,7 +140,7 @@ router
         subject: "MentorDash: Marks Update",
         text: `${mentor} has updated your marks. Please check the portal for more details`,
       })
-      
+
       res.json({ message: "Mail sent" });
     } catch (e) {
       res.status(500).json({ message: e.message });
