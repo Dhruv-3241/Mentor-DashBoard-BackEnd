@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const StudentController = require("../controller/students");
 const MentorController = require("../controller/mentors");
+const { sendMail } = require("../controller/mailer");
 const router = Router();
 
 router
@@ -123,6 +124,24 @@ router
       res.json({
         data: students,
       });
+    } catch (e) {
+      res.status(500).json({ message: e.message });
+    }
+  })
+  .post("/sendMail", async (req, res) => {
+    const { mentor } = req.body;
+    try {
+      const students = await MentorController.getMentorStudents(mentor);
+      const tos = students.map((student) => { name: student.name, email: student.email });
+
+      // send mail
+      await sendMail({
+        tos: tos.map(x => x.email),
+        subject: "MentorDash: Marks Update",
+        text: `${mentor} has updated your marks. Please check the portal for more details`,
+      })
+      
+      res.json({ message: "Mail sent" });
     } catch (e) {
       res.status(500).json({ message: e.message });
     }

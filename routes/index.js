@@ -10,5 +10,5 @@ router
     res.json({
       message: "Welcome to the MentorDash API",
     });
-  });
+  })
 module.exports = router;

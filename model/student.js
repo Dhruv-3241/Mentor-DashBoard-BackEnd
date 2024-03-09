@@ -8,7 +8,7 @@ const topics = [
 ];
 
 class Student {
-  constructor(name, roll_no, marks, mentor, stream) {
+  constructor(name, roll_no, marks, mentor, stream,email) {
     marks = marks.slice(0, 6).map((mark, index) => {
       return {
         name: topics[index],
@@ -16,12 +16,13 @@ class Student {
       };
     });
     //console.log(roll_no)
-    this.#validate(name, roll_no, marks, mentor, stream);
+    this.#validate(name, roll_no, marks, mentor, stream,email);
     this.name = name;
     this.roll_no = roll_no;
     this.marks = marks ?? null;
     this.mentor = mentor ?? null;
     this.stream = stream;
+    this.email = email;
   }
   /**
    * Description: use to valid correct data types
@@ -69,7 +70,8 @@ class Student {
       roll_no: this.roll_no,
       marks: this.marks,
       mentor: this.mentor,
-      stream:this.stream,
+      stream: this.stream,
+      email: this.email
     };
   }
 
@@ -79,7 +81,8 @@ class Student {
       roll_no: this.roll_no,
       marks: this.marks.map(x => x.value.toString()),
       mentor: this.mentor,
-      stream:this.stream,
+      stream: this.stream,
+      email: this.email
     };
   }
 }
