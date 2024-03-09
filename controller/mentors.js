@@ -1,4 +1,5 @@
 const db = require("./db");
+const { getStudent } = require("./students");
 
 const getMentorStudents = async (mentor) => {
     const data = await db.get({ name: mentor }, "mentors");
@@ -7,10 +8,7 @@ const getMentorStudents = async (mentor) => {
     console.log(data)
     for (const st of data.students) {
         console.log(st);
-        const student = await db.get({ rollno: st }, "students").catch((err) => {
-            console.error(err);
-            return {};
-        })
+        const student = await getStudent({ rollno: st });
         console.log(student)
         students.push(student);
     }
