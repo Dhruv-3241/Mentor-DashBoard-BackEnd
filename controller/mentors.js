@@ -19,7 +19,8 @@ const getMentorStudents = async (mentor) => {
 }
 
 const lockMentor = async (mentor) => {
-    return db.update({ name: mentor }, { locked: true }, "mentors");
+
+    return db.update({ name: mentor }, { locked: true }, "mentors").then(d => console.log(d));
 }
 
 const unlockMentor = async (mentor) => {
